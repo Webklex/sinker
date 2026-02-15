@@ -1,6 +1,6 @@
 {
-    "name": "sinker",
-    "version": "1.0.0",
+    "name": "@webklex/sinker",
+    "version": "1.0.1",
     "description": "Minimalistic security tool to scan for dangerous sinks (XSS, data leakage) in codebases.",
     "license": "MIT",
     "repository": {

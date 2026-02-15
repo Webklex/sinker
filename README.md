@@ -26,7 +26,7 @@ unprotected sinks before they reach production.
 
 ```bash
 # Using npm
-npm install webklex/sinker --save-dev
+npm install @webklex/sinker --save-dev
 ```
 
 ### Usage
@@ -173,8 +173,8 @@ The MIT License (MIT). Please see [License File][link-license] for more informat
 
 [ico-license]: https://img.shields.io/badge/License-MIT-green.svg
 [ico-hits]: https://hits.webklex.com/svg/webklex/sinker
-[ico-snyk]: https://snyk-widget.herokuapp.com/badge/npm/webklex/sinker/badge.svg
+[ico-snyk]: https://snyk.io/test/github/webklex/sinker/badge.svg
 
 [link-license]: LICENSE
 [link-hits]: https://hits.webklex.com
-[link-snyk]: https://snyk.io/vuln/npm:webklex%2Fsinker
+[link-snyk]: https://snyk.io/test/github/webklex/sinker
