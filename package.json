@@ -1,0 +1,49 @@
+{
+    "name": "sinker",
+    "version": "1.0.0",
+    "description": "Minimalistic security tool to scan for dangerous sinks (XSS, data leakage) in codebases.",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/webklex/sinker.git"
+    },
+    "keywords": ["security", "static-analysis", "xss", "dom-xss", "cli"],
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "main": "dist/sinker.min.js",
+    "bin": {
+        "sinker": "dist/sinker.min.js"
+    },
+    "files": ["dist/", "README.md", "LICENSE"],
+    "scripts": {
+        "build": "esbuild src/index.ts --bundle --minify --sourcemap --format=cjs --platform=node --banner:js='#!/usr/bin/env node' --outfile=dist/sinker.min.js",
+        "prepublishOnly": "npm run build",
+        "lint": "eslint . && prettier --check .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "example": "node dist/sinker.min.js example",
+        "test": "vitest run",
+        "test:coverage": "vitest run --coverage"
+    },
+    "dependencies": {
+        "picocolors": "^1.1.1"
+    },
+    "devDependencies": {
+        "@types/node": "^25.2.3",
+        "@vitest/coverage-v8": "^4.0.18",
+        "esbuild": "^0.27.3",
+        "eslint": "9.39.2",
+        "eslint-config-prettier": "10.1.8",
+        "eslint-import-resolver-typescript": "^4.4.4",
+        "eslint-plugin-import-x": "^4.16.1",
+        "eslint-plugin-prettier": "5.5.5",
+        "eslint-plugin-security": "^3.0.1",
+        "globals": "^17.3.0",
+        "jiti": "^2.6.1",
+        "typescript": ">=5.9.3",
+        "typescript-eslint": "^8.55.0",
+        "vitest": "^4.0.18"
+    },
+    "private": false
+}
