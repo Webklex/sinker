@@ -1,7 +1,9 @@
 # Sinker
 
-[![License: MIT][ico-license]][link-license]
+[![NPM Version][ico-npm-version]][link-npm]
+[![NPM Downloads][ico-npm-downloads]][link-npm]
 [![Hits][ico-hits]][link-hits]
+[![License: MIT][ico-license]][link-license]
 [![Snyk][ico-snyk]][link-snyk]
 
 Sinker is a minimalistic security tool designed to scan your codebase for potentially dangerous "sinks" (e.g.,
@@ -234,9 +236,12 @@ If you discover any security related issues, please email github@webklex.com ins
 The MIT License (MIT). Please see [License File][link-license] for more information.
 
 [ico-license]: https://img.shields.io/badge/License-MIT-green.svg
+[ico-npm-version]: https://img.shields.io/npm/v/@webklex/sinker.svg?style=flat-square
+[ico-npm-downloads]: https://img.shields.io/npm/dm/@webklex/sinker.svg?style=flat-square
 [ico-hits]: https://hits.webklex.com/svg/webklex/sinker
 [ico-snyk]: https://snyk.io/test/github/webklex/sinker/badge.svg
 [link-license]: https://github.com/Webklex/sinker/blob/main/LICENSE
+[link-npm]: https://www.npmjs.com/package/@webklex/sinker
 [link-changelog]: https://github.com/Webklex/sinker/blob/main/CHANGELOG.md
 [link-hits]: https://hits.webklex.com
 [link-snyk]: https://snyk.io/test/github/webklex/sinker
