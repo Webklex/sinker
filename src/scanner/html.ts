@@ -1,3 +1,5 @@
+import { HtmlScriptBlock } from './types';
+
 function _sliceBlock(
     scriptOpenRe: RegExp,
     closeMatch: RegExpExecArray,
@@ -32,10 +34,7 @@ function _getNextBlock(
     scriptOpenRe: RegExp,
     scriptCloseRe: RegExp,
     html: string
-): {
-    code: string;
-    startLine: number;
-} | null {
+): HtmlScriptBlock | null {
     const closeMatch = scriptCloseRe.exec(html);
     if (!closeMatch) return null;
     return _sliceBlock(scriptOpenRe, closeMatch, html);
@@ -44,7 +43,7 @@ function _getNextBlock(
 export function extractHtmlScriptBlocks(
     html: string
 ): Array<{ code: string; startLine: number }> {
-    const blocks: Array<{ code: string; startLine: number }> = [];
+    const blocks: Array<HtmlScriptBlock> = [];
     const { scriptOpenRe, scriptCloseRe } = _getScriptRegex();
 
     while (scriptOpenRe.exec(html) !== null) {

@@ -14,6 +14,11 @@ export interface ViolationContextLine {
     text: string;
 }
 
+export interface HtmlScriptBlock {
+    code: string;
+    startLine: number;
+}
+
 export interface ViolationContext {
     before: Array<ViolationContextLine> | null;
     offendingLine: string;

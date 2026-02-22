@@ -1,8 +1,13 @@
-import * as path from 'node:path';
-import * as fsSync from 'node:fs';
-import { promises as fs } from 'node:fs';
+import * as path from 'path';
+import * as fsSync from 'fs';
+import { promises as fs } from 'fs';
 
-import type { CompiledSink, ScanResult, Violation } from './types';
+import type {
+    CompiledSink,
+    HtmlScriptBlock,
+    ScanResult,
+    Violation,
+} from './types';
 import { extractHtmlScriptBlocks } from './html';
 import { scanText } from './scanText';
 
@@ -37,7 +42,7 @@ function shouldRecurseIntoDir(
     return !dirName.startsWith('.') && !isIgnored(fullPath, ignored);
 }
 
-function isIgnored(path: string, ignored: string[]): boolean {
+export function isIgnored(path: string, ignored: string[]): boolean {
     return ignored.some(pattern => {
         const _str: string =
             '^' +
@@ -47,7 +52,7 @@ function isIgnored(path: string, ignored: string[]): boolean {
                 .join('.*') +
             '$';
         const regex = new RegExp(_str);
-        const fileName = path.split(/[/\\]/).pop() || '';
+        const fileName: string = path.split(/[/\\]/).pop() || '';
         return (
             regex.test(path) || regex.test(fileName) || path.endsWith(pattern)
         );
@@ -66,7 +71,7 @@ export async function scanFile(params: {
         return { violations: [], count: 0 };
     }
 
-    const content = await fs.readFile(filePath, 'utf-8');
+    const content: string = await fs.readFile(filePath, 'utf-8');
 
     if (isJsTsFile(filePath)) {
         return {
@@ -82,7 +87,7 @@ export async function scanFile(params: {
     }
 
     if (filePath.endsWith('.html')) {
-        const blocks = extractHtmlScriptBlocks(content);
+        const blocks: HtmlScriptBlock[] = extractHtmlScriptBlocks(content);
         const all: Violation[] = [];
 
         for (const b of blocks) {
@@ -114,7 +119,7 @@ async function scanEntry(
     ignored: string[]
 ): Promise<ScanResult> {
     // @safe-sink: entry.name is only set internally
-    const fullPath = path.join(dirPath, entry.name);
+    const fullPath: string = path.join(dirPath, entry.name);
 
     if (entry.isDirectory()) {
         // @safe-sink: entry.name is only set internally
