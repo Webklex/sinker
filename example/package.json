@@ -7,10 +7,12 @@
     "build": "tsc && cp src/index.html dist/index.html",
     "sinker": "sinker --context-depth=3 ./src",
     "serve": "serve dist",
-    "start": "npm run build && npm run serve"
+    "start": "npm run build && npm run serve",
+    "lint": "eslint ."
   },
   "devDependencies": {
-    "sinker": "file:..",
+    "@webklex/sinker": "file:..",
+    "eslint": "^10.0.1",
     "serve": "^14.2.5",
     "typescript": "^5.5.3"
   },
