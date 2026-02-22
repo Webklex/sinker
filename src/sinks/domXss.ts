@@ -1,7 +1,7 @@
 import { Sink } from './types';
 
 export const domXssSinks: Sink = {
-    name: 'DOM-XSS Sinks',
+    name: 'DOM-XSS Sink',
     description:
         'Applying user input to DOM without proper sanitization can lead to DOM-based XSS.',
     link: 'https://portswigger.net/web-security/cross-site-scripting/dom-based',

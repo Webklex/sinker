@@ -1,7 +1,7 @@
 import { Sink } from './types';
 
 export const jsInjectionSinks: Sink = {
-    name: 'JavaScript Injection Sinks',
+    name: 'JavaScript Injection Sink',
     description:
         'One of the most dangerous sinks in DOM-based XSS attacks, allowing for arbitrary code execution.',
     link: 'https://portswigger.net/web-security/dom-based/javascript-injection',

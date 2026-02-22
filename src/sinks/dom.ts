@@ -1,7 +1,7 @@
 import { Sink } from './types';
 
 export const domSinks: Sink = {
-    name: 'DOM-Data Manipulation Sinks',
+    name: 'DOM-Data Manipulation Sink',
     description:
         'Manipulating the document dom can lead to cross-domain attacks and other vulnerabilities.',
     link: 'https://portswigger.net/web-security/dom-based/dom-data-manipulation',

@@ -1,7 +1,7 @@
 import { Sink } from './types';
 
 export const openRedirectSinks: Sink = {
-    name: 'Open Redirect Sinks',
+    name: 'Open Redirect Sink',
     description: 'This sink can be used to perform open redirects.',
     link: 'https://portswigger.net/web-security/dom-based/open-redirection',
     displayContextBefore: true,

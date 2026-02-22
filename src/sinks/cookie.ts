@@ -1,7 +1,7 @@
 import { Sink } from './types';
 
 export const cookieSinks: Sink = {
-    name: 'Cookie Sinks',
+    name: 'Cookie Sink',
     description:
         'An improper sanitized or validated value can lead to cookie theft, XSS, open redirects and other vulnerabilities.',
     link: 'https://portswigger.net/web-security/dom-based/cookie-manipulation',
