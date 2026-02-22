@@ -20,11 +20,11 @@ function hasSafeSinkerAbove(
     let i = fromIndexExclusive;
 
     while (i >= 0) {
-        const prev = lines[i].trim();
+        const prev: string = lines[i].trim();
 
         if (prev.includes('@safe-sink')) return true;
 
-        const canSkip = prev === '' || isIgnorableCommentLine(prev);
+        const canSkip: boolean = prev === '' || isIgnorableCommentLine(prev);
         if (!canSkip) return false;
 
         i--;
@@ -52,17 +52,17 @@ function getViolationContext(
         context.before = Array.from(
             { length: currentLineIndex - start },
             (_, k) => {
-                const i = start + k;
+                const i: number = start + k;
                 return { line: lineOffset + i, text: lines[i].trim() };
             }
         );
     }
 
     if (sink.metadata.displayContextAfter) {
-        const start = Math.max(currentLineIndex + 1);
-        const end = Math.min(totalLines, start + options.contextDepth);
+        const start: number = Math.max(currentLineIndex + 1);
+        const end: number = Math.min(totalLines, start + options.contextDepth);
         context.after = Array.from({ length: end - start }, (_, k) => {
-            const i = start + k;
+            const i: number = start + k;
             return { line: lineOffset + i, text: lines[i].trim() };
         });
     }
@@ -79,17 +79,17 @@ export function scanText(params: {
 }): Violation[] {
     const { text, displayPath, compiledSinks, lineOffset, options } = params;
 
-    const lines = text.split(/\r?\n/);
+    const lines: string[] = text.split(/\r?\n/);
     const violations: Violation[] = [];
-    const totalLines = lines.length;
+    const totalLines: number = lines.length;
 
     for (
         let currentLineIndex = 0;
         currentLineIndex < totalLines;
         currentLineIndex++
     ) {
-        const line = lines[currentLineIndex];
-        const trimmed = line.trim();
+        const line: string = lines[currentLineIndex];
+        const trimmed: string = line.trim();
 
         if (isIgnorableCommentLine(trimmed)) continue;
 

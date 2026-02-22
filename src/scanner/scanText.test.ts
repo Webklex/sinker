@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+
 import { scanText } from './scanText';
 import { CompiledSink } from './types';
 

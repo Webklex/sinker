@@ -1,8 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { main } from './main';
+
 import * as scanFs from '../scanner/scanFs';
 import * as config from '../config';
 import * as sinks from '../scanner/sinks';
+
+import { main } from './main';
 
 vi.mock('../scanner/scanFs');
 vi.mock('../config');

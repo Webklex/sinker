@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
 import { main } from './cli/main';
 
 vi.mock('./cli/main', () => ({

@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
+
+import { Sink } from '../sinks';
+
 import { compileSinks, getUniqueSinks, loadSinks } from './sinks';
-import { Sink } from '../sinks/types';
 
 describe('sinks', () => {
     describe('compileSinks', () => {

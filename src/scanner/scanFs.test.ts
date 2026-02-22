@@ -1,8 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { scanFile, scanDir, pathExistsSync, statSync } from './scanFs';
 import { promises as fs } from 'node:fs';
 import * as fsSync from 'node:fs';
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
 import { CompiledSink } from './types';
+import { scanFile, scanDir, pathExistsSync, statSync } from './scanFs';
 
 vi.mock('node:fs', async () => {
     const actual = await vi.importActual('node:fs');
