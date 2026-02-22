@@ -7,22 +7,28 @@ function escapeRegExpLiteral(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function _filterUniqueSinks(sinks: SinkMatch[]) {
+    const uniqueMap = new Map<string, SinkMatch>();
+    for (const s of sinks) {
+        uniqueMap.set(s.sink, s);
+    }
+    return uniqueMap;
+}
+
 export function loadSinks(config: SinkerConfig | null): {
     sinks: CompiledSink[];
     count: number;
 } {
     const sinks = getUniqueSinks(new Set(config?.ignoredSinks ?? []));
     if (config?.sinks) {
-        const uniqueMap = new Map<string, SinkMatch>();
-        for (const s of sinks) {
-            uniqueMap.set(s.sink, s);
-        }
+        const uniqueMap = _filterUniqueSinks(sinks);
 
         for (const def of config.sinks) {
             for (const rawSink of def.sinks) {
                 addSinkToMap(rawSink, uniqueMap, def);
             }
         }
+
         return {
             sinks: compileSinks([...uniqueMap.values()]),
             count: uniqueMap.size,
