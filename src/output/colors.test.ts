@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { createColorizer } from './colors';
 import pc from 'picocolors';
+
+import { createColorizer } from './colors';
 
 describe('colors', () => {
     it('should return real colorizer when useColor is true', () => {

@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+import { ScanResult, Violation } from '../scanner/types';
+
 import { printViolations } from './reporter';
 import { createColorizer } from './colors';
-import { ScanResult, Violation } from '../scanner/types';
 
 describe('reporter', () => {
     const c = createColorizer(false);
@@ -22,7 +24,7 @@ describe('reporter', () => {
             violations: [],
             count: 1,
         };
-        printViolations(result, c);
+        printViolations(result, c, false);
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
@@ -53,7 +55,7 @@ describe('reporter', () => {
             count: 1,
         };
 
-        printViolations(result, c);
+        printViolations(result, c, false);
 
         expect(consoleErrorSpy).toHaveBeenCalledWith(
             expect.stringContaining('Found 1 violations')
@@ -106,7 +108,7 @@ describe('reporter', () => {
             },
         };
 
-        printViolations({ violations: [violation], count: 1 }, c);
+        printViolations({ violations: [violation], count: 1 }, c, false);
         expect(consoleErrorSpy).toHaveBeenCalled();
     });
 });
