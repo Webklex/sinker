@@ -7,9 +7,11 @@ module.exports = {
         '*.test.js',
         '*.spec.js',
         '*.min.js',
-        '*.map'
+        '*.map',
+        '**/src/sinks/*.ts',
     ],
     sinks: [],
     colors: true,
-    contextDepth: 3,
+    minimal: false,
+    contextDepth: 2,
 };
