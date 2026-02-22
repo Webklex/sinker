@@ -5,7 +5,7 @@ const root = process.cwd();
 const pkgPath = path.join(root, 'package.json');
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 
-const outFile = path.join(root, 'src', 'consts.generated.ts');
+const outFile = path.join(root, 'src', 'consts.ts');
 
 const version = typeof pkg.version === 'string' ? pkg.version : '0.0.0';
 const configFilename = 'sinker.config.js';
