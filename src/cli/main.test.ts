@@ -16,6 +16,7 @@ describe('main', () => {
         sinks: [],
         ignored: [],
         colors: true,
+        minimal: false,
         contextDepth: 3,
     };
 
