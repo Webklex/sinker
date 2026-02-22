@@ -1,12 +1,13 @@
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-// @ts-ignore
-import pluginSecurity from 'eslint-plugin-security';
 import { importX } from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
-
 // @ts-ignore
-import eslintIgnores from './eslint.ignore.ts';
+import { sinkerPlugin } from '@webklex/sinker/eslint-plugin';
+// @ts-ignore
+import pluginSecurity from 'eslint-plugin-security';
+
+import eslintIgnores from './eslint.ignore';
 
 export default defineConfig([
     eslintIgnores,
@@ -15,13 +16,31 @@ export default defineConfig([
     eslintPluginPrettierRecommended,
     importX.flatConfigs.recommended,
     {
-        files: ['**/*.js', '**/*.ts', '**/*.d.ts', '**/*.tsx', '**/*.d.tsx'],
+        files: ['eslint-plugin/src/**/*.{js,ts,tsx,d.ts,d.tsx}'],
+        settings: {
+            'import-x/resolver': {
+                typescript: {
+                    alwaysTryTypes: true,
+                    project: './tsconfig.json',
+                },
+            },
+        },
+    },
+    {
+        files: ['scripts/**/*.{js,mjs,cjs}'],
+        rules: {
+            'security/detect-non-literal-fs-filename': 'off',
+        },
+    },
+    {
+        files: ['src/**/*.{js,ts,tsx,d.ts,d.tsx}'],
         rules: {
             'prettier/prettier': 'error',
             classPrivateMethods: 'off',
             'block-spacing': 'error',
             'no-debugger': 'off',
             'no-console': 'off',
+            'commonjs-variable-in-esm': 'off',
             'no-empty-function': 'error',
             '@typescript-eslint/ban-ts-comment': 'off',
             'import-x/no-nodejs-modules': 'off',
@@ -64,7 +83,16 @@ export default defineConfig([
                     varsIgnorePattern: '^h$',
                 },
             ],
+            'sinker/no-sink': [
+                'warn',
+                {
+                    contextDepth: 3,
+                    colors: true,
+                    minimal: true,
+                },
+            ],
         },
+        plugins: { sinker: sinkerPlugin },
         settings: {
             'import-x/resolver': {
                 typescript: {
