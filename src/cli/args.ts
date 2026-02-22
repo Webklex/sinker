@@ -2,6 +2,7 @@ export interface ScanOptions {
     useColor: boolean;
     contextDepth: number;
     help: boolean;
+    version: boolean;
 }
 
 export interface ParsedArgs {
@@ -22,6 +23,7 @@ export function parseArgs(argv: string[]): ParsedArgs {
     const args = argv.slice(2);
     const useColor = !args.includes('--no-color') && !args.includes('-nc');
     const help = args.includes('--help') || args.includes('-h');
+    const version = args.includes('--version') || args.includes('-v');
     const targetLocation =
         args.find(a => !a.startsWith('--') && !a.startsWith('-')) ?? '.';
     const contextDepth = _parseContextDepth(args);
@@ -32,6 +34,7 @@ export function parseArgs(argv: string[]): ParsedArgs {
             useColor,
             contextDepth,
             help,
+            version,
         },
     };
 }

@@ -4,6 +4,7 @@ import { loadSinks } from '../scanner/sinks';
 import { pathExistsSync, scanDir, scanFile, statSync } from '../scanner/scanFs';
 import { loadConfig, SinkerConfig } from '../config';
 import { CompiledSink } from '../scanner/types';
+import { SINKER_VERSION } from '../consts';
 
 import { parseArgs, ParsedArgs } from './args';
 
@@ -58,7 +59,7 @@ function _validateTarget(target: string, c: Colorizer): boolean {
 
 function _printHelp(c: Colorizer): void {
     console.log(`
-${c.blue('sinker')} - Minimalistic security tool to scan for potentially dangerous sinks and sources.
+${c.blue('sinker')} v${SINKER_VERSION} - Minimalistic security tool to scan for potentially dangerous sinks and sources.
 
 ${c.bold('Usage:')}
   sinker [target] [options]
@@ -78,11 +79,20 @@ ${c.bold('Examples:')}
 `);
 }
 
+function _printVersion(c: Colorizer): void {
+    console.log(`${c.blue('sinker')} v${SINKER_VERSION}`);
+}
+
 export async function main(argv: string[]): Promise<number> {
     const { args, config, contextDepth, c, sinks, count } = await _setup(argv);
 
     if (args.options.help) {
         _printHelp(c);
+        return 0;
+    }
+
+    if (args.options.version) {
+        _printVersion(c);
         return 0;
     }
 
