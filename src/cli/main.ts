@@ -12,6 +12,7 @@ async function _setup(argv: string[]): Promise<{
     args: ParsedArgs;
     config: SinkerConfig;
     useColor: boolean;
+    minimal: boolean;
     contextDepth: number;
     c: Colorizer;
     sinks: CompiledSink[];
@@ -21,6 +22,7 @@ async function _setup(argv: string[]): Promise<{
     const config = await loadConfig();
 
     const useColor = args.options.useColor && config.colors;
+    const minimal = args.options.minimal && config.minimal;
     const contextDepth =
         args.options.contextDepth >= 0
             ? args.options.contextDepth
@@ -33,6 +35,7 @@ async function _setup(argv: string[]): Promise<{
     return {
         args,
         config,
+        minimal,
         useColor,
         contextDepth,
         c,
@@ -69,13 +72,14 @@ ${c.bold('Arguments:')}
 
 ${c.bold('Options:')}
   -h, --help            Show this help message
+  -m, --minimal         Show only minimal output (no colors, no context)         
   -nc, --no-color       Disable colored output
   --context-depth=N     Number of lines of context to show (default: from config)
 
 ${c.bold('Examples:')}
   sinker .
   sinker src/index.ts --context-depth=5
-  sinker --no-color
+  sinker src/index.ts --no-color -m -h
 `);
 }
 
@@ -84,7 +88,8 @@ function _printVersion(c: Colorizer): void {
 }
 
 export async function main(argv: string[]): Promise<number> {
-    const { args, config, contextDepth, c, sinks, count } = await _setup(argv);
+    const { args, config, contextDepth, minimal, c, sinks, count } =
+        await _setup(argv);
 
     if (args.options.help) {
         _printHelp(c);
@@ -122,7 +127,7 @@ export async function main(argv: string[]): Promise<number> {
 
     console.log(c.blue(`Successfully scanned ${scanResult.count} files`));
     if (scanResult.violations.length > 0) {
-        printViolations(scanResult, c);
+        printViolations(scanResult, c, minimal);
         return 1;
     }
 

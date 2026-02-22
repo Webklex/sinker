@@ -1,5 +1,6 @@
 export interface ScanOptions {
     useColor: boolean;
+    minimal: boolean;
     contextDepth: number;
     help: boolean;
     version: boolean;
@@ -22,6 +23,7 @@ function _parseContextDepth(args: string[]): number {
 export function parseArgs(argv: string[]): ParsedArgs {
     const args = argv.slice(2);
     const useColor = !args.includes('--no-color') && !args.includes('-nc');
+    const minimal = !args.includes('--minimal') && !args.includes('-m');
     const help = args.includes('--help') || args.includes('-h');
     const version = args.includes('--version') || args.includes('-v');
     const targetLocation =
@@ -32,6 +34,7 @@ export function parseArgs(argv: string[]): ParsedArgs {
         targetLocation,
         options: {
             useColor,
+            minimal,
             contextDepth,
             help,
             version,
