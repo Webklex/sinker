@@ -1,27 +1,55 @@
 {
     "name": "@webklex/sinker",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "Minimalistic security tool to scan for dangerous sinks (XSS, data leakage) in codebases.",
     "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/webklex/sinker.git"
     },
-    "keywords": ["security", "static-analysis", "xss", "dom-xss", "cli"],
+    "keywords": [
+        "security",
+        "static-analysis",
+        "eslint-plugin",
+        "xss",
+        "dom-xss",
+        "cli"
+    ],
     "engines": {
-        "node": ">=18.0.0"
+        "node": ">=22.12.0"
     },
     "main": "dist/sinker.min.js",
     "bin": {
         "sinker": "dist/sinker.min.js"
     },
-    "files": ["dist/", "README.md", "LICENSE"],
+    "files": [
+        "README.md",
+        "LICENSE",
+        "dist/sinker.min.js",
+        "eslint-plugin/README.md",
+        "eslint-plugin/index.js",
+        "eslint-plugin/index.mjs",
+        "eslint-plugin/index.d.ts"
+    ],
+    "exports": {
+        ".": {
+            "default": "./dist/sinker.min.js"
+        },
+        "./eslint-plugin": {
+            "types": "./eslint-plugin/index.d.ts",
+            "require": "./eslint-plugin/index.js",
+            "import": "./eslint-plugin/index.mjs"
+        }
+    },
     "scripts": {
-        "build": "esbuild src/index.ts --bundle --minify --sourcemap --format=cjs --platform=node --banner:js='#!/usr/bin/env node' --outfile=dist/sinker.min.js",
+        "build": "npm run build:consts && npm run build:sinker && npm run build:plugin",
+        "build:consts": "node scripts/build-consts.mjs",
+        "build:sinker": "esbuild src/index.ts --bundle --minify --format=cjs --platform=node --banner:js='#!/usr/bin/env node' --outfile=dist/sinker.min.js",
+        "build:plugin": "esbuild eslint-plugin/src/index-cjs.ts --bundle --minify --format=cjs --platform=node --outfile=eslint-plugin/index.js",
         "prepublishOnly": "npm run build",
         "lint": "eslint . && prettier --check .",
         "lint:fix": "eslint . --fix",
-        "format": "prettier --write .",
+        "format": "prettier --write . && npm run lint:fix",
         "example": "node dist/sinker.min.js example",
         "test": "vitest run",
         "test:coverage": "vitest run --coverage"
@@ -33,17 +61,21 @@
         "@types/node": "^25.2.3",
         "@vitest/coverage-v8": "^4.0.18",
         "esbuild": "^0.27.3",
-        "eslint": "9.39.2",
-        "eslint-config-prettier": "10.1.8",
+        "eslint": "^9.39.3",
+        "eslint-config-prettier": "10.1.0",
         "eslint-import-resolver-typescript": "^4.4.4",
         "eslint-plugin-import-x": "^4.16.1",
-        "eslint-plugin-prettier": "5.5.5",
-        "eslint-plugin-security": "^3.0.1",
+        "eslint-plugin-prettier": "5.2.3",
+        "eslint-plugin-security": "^4.0.0",
         "globals": "^17.3.0",
         "jiti": "^2.6.1",
+        "prettier": "^3.5.1",
         "typescript": ">=5.9.3",
-        "typescript-eslint": "^8.55.0",
+        "typescript-eslint": "^8.56.0",
         "vitest": "^4.0.18"
     },
-    "private": false
+    "private": false,
+    "overrides": {
+        "minimatch": "^10.2.1"
+    }
 }
