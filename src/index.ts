@@ -7,7 +7,8 @@ main(process.argv)
         process.exitCode = code;
     })
     .catch((err: unknown) => {
-        const message = err instanceof Error ? err.message : String(err);
+        const message: string =
+            err instanceof Error ? err.message : String(err);
         // Keep output simple and safe for CI logs
         console.error(pc.red(`Unexpected error: ${message}`));
         process.exitCode = 1;
