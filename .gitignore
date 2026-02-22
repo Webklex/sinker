@@ -13,3 +13,4 @@ yarn-error.log*
 /coverage/
 .DS_Store
 **/.DS_Store
+example/package-lock.json
